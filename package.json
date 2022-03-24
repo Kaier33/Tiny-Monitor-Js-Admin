@@ -1,0 +1,97 @@
+{
+  "name": "monit_js_platform",
+  "version": "1.0.0",
+  "author": "",
+  "participants": [],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:report": "vue-cli-service build --report",
+    "globle": "npm install -g cnpm --registry=https://registry.npmmirror.com&&cnpm i rimraf npm-check-updates nrm -g&&rimraf node_modules&&cnpm i",
+    "lint": "vue-cli-service lint",
+    "lint:style": "stylelint-config-prettier-check",
+    "inspect": "vue-cli-service inspect",
+    "template": "plop",
+    "clear": "rimraf node_modules&&npm install --registry=https://registry.npmmirror.com",
+    "image-webpack-loader": "cnpm i image-webpack-loader -D",
+    "use:npm": "nrm use npm",
+    "use:taobao": "nrm use taobao",
+    "update": "ncu -u --reject sass-loader,sass,screenfull,eslint,chalk,vue-echarts,vue,vue-router,vuex,@vue/cli-plugin-babel,@vue/cli-plugin-eslint,@vue/cli-service&&cnpm i",
+    "update:globle": "ncu -g --concurrency 10 --timeout 80000"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "clipboard": "^2.0.10",
+    "core-js": "^3.21.0",
+    "dayjs": "^1.10.7",
+    "element-ui": "^2.15.6",
+    "jsencrypt": "^3.2.1",
+    "lodash": "^4.17.21",
+    "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
+    "qs": "^6.10.3",
+    "screenfull": "^5.2.0",
+    "sortablejs": "^1.14.0",
+    "vab-icon": "^0.0.1",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2",
+    "zx-count": "^0.3.7",
+    "zx-layouts": "^0.6.28",
+    "zx-templates": "^0.0.26"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.15",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-service": "^4.5.15",
+    "@vue/composition-api": "^1.4.5",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "babel-eslint": "^10.1.0",
+    "body-parser": "^1.19.1",
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
+    "eslint": "^7.32.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.4.1",
+    "filemanager-webpack-plugin": "^6.1.7",
+    "image-webpack-loader": "^8.1.0",
+    "lint-staged": "^12.3.3",
+    "plop": "^3.0.5",
+    "prettier": "^2.5.1",
+    "sass": "~1.32.13",
+    "sass-loader": "^10.1.1",
+    "stylelint": "^14.3.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recess-order": "^3.0.0",
+    "svg-sprite-loader": "^6.0.11",
+    "vue-template-compiler": "^2.6.14",
+    "webpackbar": "^5.0.2"
+  },
+  "keywords": [
+    "vue",
+    "admin",
+    "dashboard",
+    "element-ui",
+    "vue-admin",
+    "element-admin",
+    "boilerplate",
+    "admin-template",
+    "management-system"
+  ],
+  "engines": {
+    "node": ">=8.9",
+    "npm": ">= 3.0.0"
+  }
+}
