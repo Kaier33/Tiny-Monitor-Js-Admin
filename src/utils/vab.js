@@ -17,7 +17,7 @@ const install = (Vue, opts = {}) => {
     return title
   })()
   /* 全局加载层 */
-  Vue.prototype.$baseLoading = (index, text) => {
+  Vue.prototype.$baseLoading = (index = 6, text) => {
     let loading
     if (!index) {
       loading = Loading.service({

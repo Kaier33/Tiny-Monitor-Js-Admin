@@ -1,11 +1,19 @@
 import request from '@/utils/request'
-import { tokenName } from '@/config'
 
 export async function login(data) {
   return request({
     url: '/auth/login',
     method: 'post',
     data,
+  })
+}
+
+export function register(userInfo) {
+  const { username, password } = userInfo
+  return request({
+    url: '/auth/register',
+    method: 'post',
+    data: { username: username.trim(), password },
   })
 }
 
@@ -23,11 +31,8 @@ export function getUserDetail(id) {
   })
 }
 
-export function register(userInfo) {
-  const { username, password } = userInfo
+export function getUserList() {
   return request({
-    url: '/auth/register',
-    method: 'post',
-    data: { user_name: username.trim(), password },
+    url: '/users',
   })
 }

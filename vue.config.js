@@ -23,7 +23,7 @@ const FileManagerPlugin = require('filemanager-webpack-plugin')
 const dayjs = require('dayjs')
 const date = dayjs().format('YYYY_M_D')
 const time = dayjs().format('YYYY-M-D HH:mm:ss')
-process.env.VUE_APP_TITLE = title || 'Monit JS Platform'
+process.env.VUE_APP_TITLE = title || 'Monit JS Admin'
 process.env.VUE_APP_UPDATE_TIME = time
 
 const resolve = (dir) => path.join(__dirname, dir)

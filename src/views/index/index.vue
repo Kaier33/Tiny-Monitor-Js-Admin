@@ -86,7 +86,12 @@
       this.fetchData()
     },
     methods: {
-      async fetchData() {},
+      async fetchData() {
+        const Loading = this.$baseLoading()
+        setTimeout(() => {
+          Loading.close()
+        }, 2000)
+      },
     },
   }
 </script>
@@ -117,18 +122,6 @@
         }
       }
     }
-
-    .card {
-      ::v-deep {
-        .el-card__body {
-          .echarts {
-            width: 100%;
-            height: 305px;
-          }
-        }
-      }
-    }
-
     .icon-panel {
       height: 117px;
       text-align: center;

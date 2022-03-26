@@ -65,7 +65,7 @@ export const asyncRoutes = [
       {
         path: 'account-info',
         name: 'accountInfo',
-        component: () => import('@/views/index/index'),
+        component: () => import('@/views/personal/account'),
         meta: {
           title: ' 账号信息',
         },
@@ -73,53 +73,10 @@ export const asyncRoutes = [
       {
         path: 'change-password',
         name: 'changePassword',
-        component: () => import('@/views/index/index'),
+        component: () => import('@/views/personal/change-password'),
         meta: {
           title: ' 修改密码',
         },
-      },
-    ],
-  },
-  /* {
-    path: "/test",
-    component: Layout,
-    redirect: "noRedirect",
-    children: [
-      {
-        path: "test",
-        name: "Test",
-        component: () => import("@/views/test/index"),
-        meta: {
-          title: "test",
-          icon: "marker",
-          permissions: ["admin"],
-        },
-      },
-    ],
-  }, */
-
-  {
-    path: '/vab',
-    component: Layout,
-    redirect: 'noRedirect',
-    name: 'Vab',
-    alwaysShow: true,
-    meta: { title: ' 组件', icon: 'box-open' },
-    children: [
-      // {
-      //   path: 'permissions',
-      //   name: 'Permission',
-      //   component: () => import('@/views/vab/permissions/index'),
-      //   meta: {
-      //     title: '角色权限',
-      //     permissions: ['admin', 'editor'],
-      //   },
-      // },
-      {
-        path: 'loading',
-        name: 'Loading',
-        component: () => import('@/views/vab/loading/index'),
-        meta: { title: 'loading', permissions: ['admin'] },
       },
     ],
   },
@@ -136,21 +93,38 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: '/asd',
+        path: 'white-list',
         name: 'whitelist',
-        component: () =>
-          import('@/views/personnelManagement/userManagement/index'),
+        component: () => import('@/views/system/white-list/index'),
         meta: { title: '项目白名单', permissions: ['admin'] },
       },
       {
-        path: '/asdasd',
+        path: 'users',
         name: 'users',
-        component: () =>
-          import('@/views/personnelManagement/roleManagement/index'),
-        meta: { title: '用户管理', permissions: ['admin'] },
+        component: () => import('@/views/system/users/index'),
+        meta: { title: '成员管理', permissions: ['admin'] },
       },
     ],
   },
+  // {
+  //   path: '/vab',
+  //   component: Layout,
+  //   redirect: 'noRedirect',
+  //   name: 'Vab',
+  //   alwaysShow: true,
+  //   meta: { title: ' 组件', icon: 'box-open' },
+  //   children: [
+  //     {
+  //       path: 'permissions',
+  //       name: 'Permission',
+  //       component: () => import('@/views/vab/permissions/index'),
+  //       meta: {
+  //         title: '角色权限',
+  //         permissions: ['admin', 'editor'],
+  //       },
+  //     },
+  //   ],
+  // },
   // {
   //   path: '/personnelManagement',
   //   component: Layout,

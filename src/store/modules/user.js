@@ -11,6 +11,7 @@ import {
 } from '@/utils/accessToken'
 import { resetRouter } from '@/router'
 import { title, tokenName } from '@/config'
+import defaultAvatar from '@/assets/avatar/default_avatar.jpeg'
 
 const state = () => ({
   accessToken: getAccessToken(),
@@ -33,7 +34,7 @@ const mutations = {
     state.username = username
   },
   setAvatar(state, avatar) {
-    state.avatar = avatar
+    state.avatar = avatar || defaultAvatar
   },
   setPermissions(state, permissions) {
     state.permissions = permissions
@@ -46,7 +47,7 @@ const actions = {
   async login({ commit }, userInfo) {
     const { username, password } = userInfo
     const { data } = await login({
-      user_name: username.trim(),
+      username: username.trim(),
       password: password,
     })
     const accessToken = data.token
@@ -77,10 +78,10 @@ const actions = {
       Vue.prototype.$baseMessage('验证失败，请重新登录...', 'error')
       return false
     }
-    let { permissions = ['admin'], user_name, avatar } = data
-    if (permissions && user_name && Array.isArray(permissions)) {
+    let { permissions = ['admin'], username, avatar } = data
+    if (permissions && username && Array.isArray(permissions)) {
       commit('setPermissions', permissions)
-      commit('setUsername', user_name)
+      commit('setUsername', username)
       commit('setAvatar', avatar)
       return permissions
     } else {

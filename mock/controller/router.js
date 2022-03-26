@@ -27,7 +27,7 @@ const data = [
         path: 'userManagement',
         name: 'UserManagement',
         component: '@/views/personnelManagement/userManagement/index',
-        meta: { title: '用户管理' },
+        meta: { title: '成员管理' },
       },
       {
         path: 'roleManagement',
