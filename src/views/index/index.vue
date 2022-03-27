@@ -1,85 +1,77 @@
 <template>
   <div class="index-container">
-    <el-row :gutter="20">
-      <el-col
-        v-for="(item, index) in iconList"
-        :key="index"
-        :xs="12"
-        :sm="6"
-        :md="3"
-        :lg="3"
-        :xl="3"
-      >
-        <router-link :to="item.link" target="_blank">
-          <el-card class="icon-panel" shadow="never">
-            <vab-icon
-              :style="{ color: item.color }"
-              :icon="['fas', item.icon]"
-            ></vab-icon>
-            <p>{{ item.title }}</p>
-          </el-card>
-        </router-link>
-      </el-col>
-    </el-row>
+    <header>
+      <p class="title">项目列表</p>
+      <el-button size="medium" icon="el-icon-plus" type="primary">
+        创建项目
+      </el-button>
+    </header>
+    <main>
+      <div class="project-list">
+        <div v-for="(item, index) in list" :key="index" class="project-box">
+          <section class="header">
+            <div class="clickable">
+              <p class="p_name-box">
+                <span class="icon"></span>
+                <span class="p_name">{{ item.p_name }}</span>
+              </p>
+              <el-button type="primary" plain>查看详情</el-button>
+            </div>
+            <p class="p_desc">{{ item.p_desc }}</p>
+          </section>
+          <section :id="`p_id_${item.p_id}`" class="chart"></section>
+          <p class="tips">*最近24小时的数据</p>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
+  import * as echarts from 'echarts/core'
+  import { BarChart } from 'echarts/charts'
+  import { CanvasRenderer } from 'echarts/renderers'
+  import { GridComponent, TooltipComponent } from 'echarts/components'
+  echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent])
+  import { getProjectList } from '@/api/projects'
+  import { formatDate } from '@/utils/tool'
   export default {
     name: 'Index',
     data() {
       return {
-        iconList: [
-          {
-            icon: 'video',
-            title: '视频播放器',
-            link: '/vab/player',
-            color: '#ffc069',
+        list: [],
+        hourlist: [],
+        option: {
+          tooltip: {
+            trigger: 'axis',
           },
-          {
-            icon: 'table',
-            title: '表格',
-            link: '/vab/table/comprehensiveTable',
-            color: '#5cdbd3',
+          xAxis: {
+            type: 'category',
+            data: [],
+            show: false,
           },
-          {
-            icon: 'laptop-code',
-            title: '源码',
-            link: 'https://github.com/',
-            color: '#b37feb',
+          yAxis: {
+            type: 'value',
+            show: false,
           },
-          {
-            icon: 'book',
-            title: '书籍',
-            link: '',
-            color: '#69c0ff',
+          grid: {
+            left: '1%',
+            right: '1%',
+            bottom: 0,
           },
-          {
-            icon: 'bullhorn',
-            title: '公告',
-            link: '',
-            color: '#ff85c0',
-          },
-          {
-            icon: 'gift',
-            title: '礼物',
-            link: '',
-            color: '#ffd666',
-          },
-
-          {
-            icon: 'balance-scale-left',
-            title: '公平的世界',
-            link: '',
-            color: '#ff9c6e',
-          },
-          {
-            icon: 'coffee',
-            title: '休息一下',
-            link: '',
-            color: '#95de64',
-          },
-        ],
+          color: 'rgba(84,112,198, .5)',
+          backgroundColor: 'rgba(250, 249, 251, 1)',
+          series: [
+            {
+              barMinHeight: 1,
+              data: [
+                120, 200, 150, 80, 70, 110, 0, 120, 200, 150, 80, 70, 110, 130,
+                120, 200, 150, 80, 70, 110, 0, 120, 70, 110,
+              ],
+              type: 'bar',
+            },
+          ],
+        },
       }
     },
     created() {
@@ -88,9 +80,56 @@
     methods: {
       async fetchData() {
         const Loading = this.$baseLoading()
-        setTimeout(() => {
-          Loading.close()
-        }, 2000)
+        getProjectList().then((res) => {
+          if (res.code === 200) {
+            this.setOption()
+            this.list = res.data.list || []
+            this.$nextTick(() => {
+              this.initEcharts()
+            })
+          }
+        })
+        Loading.close()
+      },
+      initEcharts() {
+        this.list.forEach((ele) => {
+          const dom = document.getElementById(`p_id_${ele.p_id}`)
+          if (dom) {
+            const myChart = echarts.init(dom)
+            const data = Array(24).fill(0)
+            ele.statistics_data.forEach((_ele) => {
+              let _index = this.hourlist.indexOf(_ele.time)
+              if (_index !== -1) {
+                data[_index] = _ele.count
+              }
+            })
+            myChart.setOption({
+              ...this.option,
+              ...{
+                series: [
+                  {
+                    data,
+                    barMinHeight: 1,
+                    type: 'bar',
+                  },
+                ],
+              },
+            })
+          }
+        })
+      },
+      setOption() {
+        const now = new Date()
+        const timestamp = now.getTime()
+        let fmt_time = formatDate('yyyy-MM-dd hh', now)
+        this.hourlist.unshift(fmt_time)
+        this.option.xAxis.data.unshift(fmt_time.slice(5) + '时')
+        for (let i = 1; i < 24; i++) {
+          let _date = new Date(timestamp - i * 3600000)
+          let fmt_time = formatDate('yyyy-MM-dd hh', _date)
+          this.hourlist.unshift(fmt_time)
+          this.option.xAxis.data.unshift(fmt_time.slice(5) + '时')
+        }
       },
     },
   }
@@ -100,39 +139,86 @@
     padding: 0 !important;
     margin: 0 !important;
     background: #f5f7f8 !important;
-
-    ::v-deep {
-      .el-alert {
-        padding: $base-padding;
-
-        &--info.is-light {
-          min-height: 82px;
-          padding: $base-padding;
-          margin-bottom: 15px;
-          color: #909399;
-          background-color: $base-color-white;
-          border: 1px solid #ebeef5;
-        }
-      }
-
-      .el-card__body {
-        .echarts {
-          width: 100%;
-          height: 115px;
-        }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      .title {
+        font-size: 20px;
+        font-weight: 600;
       }
     }
-    .icon-panel {
-      height: 117px;
-      text-align: center;
-      cursor: pointer;
-
-      svg {
-        font-size: 40px;
-      }
-
-      p {
-        margin-top: 10px;
+    main {
+      position: relative;
+      top: 0;
+      .project-list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .project-box {
+          background-color: #fff;
+          border: 1px solid rgb(219, 214, 225);
+          border-radius: 4px;
+          box-shadow: $base-box-shadow;
+          min-height: 300px;
+          width: 480px;
+          margin-right: 25px;
+          margin-bottom: 25px;
+          word-break: break-all;
+          .header {
+            position: relative;
+            top: 0;
+            padding: 20px;
+            .clickable {
+              display: flex;
+              justify-content: space-between;
+            }
+            .p_name-box {
+              display: flex;
+              align-items: center;
+              margin: 0;
+              .p_name {
+                max-width: 250px;
+                font-size: 20px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+              .icon {
+                width: 30px;
+                height: 30px;
+                background: url('../../assets/images/JavaScript.png') no-repeat;
+                background-position: center;
+                background-size: 100% 100%;
+                border-radius: 10px;
+                overflow: hidden;
+                margin-right: 10px;
+              }
+            }
+            .p_desc {
+              max-width: 420px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              font-size: 14px;
+              color: rgb(149, 134, 165);
+            }
+          }
+          .chart {
+            position: relative;
+            top: 0;
+            width: 100%;
+            height: 150px;
+          }
+          .tips {
+            padding: 0 8px;
+            text-align: right;
+            font-size: 12px;
+            line-height: 16px;
+            color: rgb(84, 112, 198, 0.3);
+          }
+        }
       }
     }
   }

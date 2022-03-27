@@ -1,3 +1,3 @@
 <template>
-  <div>change password</div>
+  <div>todo: change password</div>
 </template>

@@ -5,7 +5,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '@/layouts'
-import EmptyLayout from '@/layouts/EmptyLayout'
+// import EmptyLayout from '@/layouts/EmptyLayout'
 import { publicPath, routerMode } from '@/config'
 
 Vue.use(VueRouter)
@@ -93,10 +93,10 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'white-list',
-        name: 'whitelist',
-        component: () => import('@/views/system/white-list/index'),
-        meta: { title: '项目白名单', permissions: ['admin'] },
+        path: 'blacklist',
+        name: 'blacklist',
+        component: () => import('@/views/system/blacklist/index'),
+        meta: { title: '拦截名单', permissions: ['admin'] },
       },
       {
         path: 'users',
