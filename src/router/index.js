@@ -55,6 +55,31 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/issue',
+    component: Layout,
+    redirect: 'noRedirect',
+    meta: { title: ' issues' },
+    hidden: true,
+    children: [
+      {
+        path: 'list',
+        name: 'issueList',
+        meta: {
+          title: ' 异常列表',
+        },
+        component: () => import('@/views/issues/list'),
+      },
+      {
+        path: 'detail',
+        name: 'issuesDetail',
+        meta: {
+          title: ' 异常详情',
+        },
+        component: () => import('@/views/issues/detail'),
+      },
+    ],
+  },
+  {
     path: '/personal-center',
     component: Layout,
     redirect: 'noRedirect',
