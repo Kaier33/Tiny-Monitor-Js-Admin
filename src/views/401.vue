@@ -67,11 +67,11 @@
           if (this.jumpTime) {
             this.jumpTime--
           } else {
+            this.$router.push({ path: '/' })
             this.$store.dispatch('tabsBar/delOthersRoutes', {
               path: '/',
             })
             clearInterval(this.timer)
-            this.$router.push({ path: '/' })
           }
         }, 1000)
       },

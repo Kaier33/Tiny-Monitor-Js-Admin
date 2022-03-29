@@ -27,7 +27,7 @@ const setting = {
   //是否显示顶部进度条
   progressBar: true,
   //缓存路由的最大数量
-  keepAliveMaxNum: 10,
+  keepAliveMaxNum: 0,
   // 路由模式，可选值为 history 或 hash
   routerMode: 'hash',
   //不经过token校验的路由
@@ -41,7 +41,7 @@ const setting = {
   //token存储位置localStorage sessionStorage
   storage: 'sessionStorage',
   //token失效回退到登录页时是否记录本次的路由
-  recordRoute: true,
+  recordRoute: false,
   //是否显示logo，不显示时设置false，显示时请填写remixIcon图标名称，暂时只支持设置remixIcon
   logo: 'logo',
   //是否显示在页面高亮错误

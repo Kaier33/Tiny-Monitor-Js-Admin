@@ -20,3 +20,9 @@ export function deleteProject(p_id) {
     method: 'delete',
   })
 }
+
+export function getProjectInfo(p_id) {
+  return request({
+    url: `/project/${p_id}`,
+  })
+}
