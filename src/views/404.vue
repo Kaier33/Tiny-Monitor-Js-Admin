@@ -4,26 +4,10 @@
       <el-row :gutter="20">
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <div class="pic-error">
-            <img
-              alt="401"
-              class="pic-error-parent"
-              src="@/assets/error_images/404.png"
-            />
-            <img
-              alt="401"
-              class="pic-error-child left"
-              src="@/assets/error_images/cloud.png"
-            />
-            <img
-              alt="401"
-              class="pic-error-child"
-              src="@/assets/error_images/cloud.png"
-            />
-            <img
-              alt="401"
-              class="pic-error-child"
-              src="@/assets/error_images/cloud.png"
-            />
+            <img alt="401" class="pic-error-parent" src="@/assets/error_images/404.png" />
+            <img alt="401" class="pic-error-child left" src="@/assets/error_images/cloud.png" />
+            <img alt="401" class="pic-error-child" src="@/assets/error_images/cloud.png" />
+            <img alt="401" class="pic-error-child" src="@/assets/error_images/cloud.png" />
           </div>
         </el-col>
 
@@ -32,9 +16,7 @@
             <div class="bullshit-oops">{{ oops }}</div>
             <div class="bullshit-headline">{{ headline }}</div>
             <div class="bullshit-info">{{ info }}</div>
-            <a class="bullshit-return-home" href="#/index">
-              {{ jumpTime }}s&nbsp;{{ btn }}
-            </a>
+            <a class="bullshit-return-home" href="#/index">{{ jumpTime }}s&nbsp;{{ btn }}</a>
           </div>
         </el-col>
       </el-row>

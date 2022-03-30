@@ -29,12 +29,7 @@
     </header>
     <main>
       <div id="line-chart-box"></div>
-      <el-table
-        v-loading="tableLoading"
-        :data="errorList"
-        height="300"
-        style="width: 100%"
-      >
+      <el-table v-loading="tableLoading" :data="errorList" height="330" style="width: 100%">
         <el-table-column type="index" label="序号" width="100" align="center">
           <template slot-scope="scope">
             <span>{{ (currentPage - 1) * pageSize + scope.$index + 1 }}</span>
@@ -44,14 +39,15 @@
         <el-table-column prop="error_type" label="异常类型"></el-table-column>
         <el-table-column prop="exception_time" label="触发时间">
           <template slot-scope="scope">
-            {{ scope.row | fmt_date }}
+            <p class="flex-box">
+              <i class="el-icon-alarm-clock"></i>
+              <i>{{ scope.row | fmt_date }}</i>
+            </p>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="120" align="center">
           <template slot-scope="scope">
-            <el-button plain type="primary" @click="handleClick(scope.row)">
-              查看详情
-            </el-button>
+            <el-button plain type="primary" @click="handleClick(scope.row)">查看详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -68,27 +64,12 @@
     </main>
     <el-dialog title="成员列表" :visible.sync="dialogMembersVisible">
       <div class="tools">
-        <el-button icon="el-icon-plus" type="primary" @click.stop="invite">
-          邀请成员
-        </el-button>
+        <el-button icon="el-icon-plus" type="primary" @click.stop="invite">邀请成员</el-button>
       </div>
       <el-table border stripe :data="memberList">
-        <el-table-column
-          align="center"
-          type="index"
-          label="序号"
-          width="50"
-        ></el-table-column>
-        <el-table-column
-          property="username"
-          label="用户名"
-          width="150"
-        ></el-table-column>
-        <el-table-column
-          property="nickname"
-          label="昵称"
-          width="200"
-        ></el-table-column>
+        <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
+        <el-table-column property="username" label="用户名" width="150"></el-table-column>
+        <el-table-column property="nickname" label="昵称" width="200"></el-table-column>
         <el-table-column property="email" label="邮箱"></el-table-column>
       </el-table>
     </el-dialog>
@@ -102,26 +83,13 @@
   import * as echarts from 'echarts/core'
   import { LineChart } from 'echarts/charts'
   import { CanvasRenderer } from 'echarts/renderers'
-  import {
-    GridComponent,
-    TooltipComponent,
-    LegendComponent,
-  } from 'echarts/components'
-  echarts.use([
-    LineChart,
-    CanvasRenderer,
-    GridComponent,
-    TooltipComponent,
-    LegendComponent,
-  ])
+  import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components'
+  echarts.use([LineChart, CanvasRenderer, GridComponent, TooltipComponent, LegendComponent])
   export default {
     name: 'IssueList',
     filters: {
       fmt_date(row) {
-        return formatDate(
-          'yyyy-MM-dd hh:mm:ss',
-          new Date(Number(row.exception_time))
-        )
+        return formatDate('yyyy-MM-dd hh:mm:ss', new Date(Number(row.exception_time)))
       },
     },
     data() {
@@ -260,9 +228,7 @@
         const today = formatDate('MM/dd', now)
         xAxis.data.unshift(today)
         for (let i = 1; i < this.dateRange; i++) {
-          xAxis.data.unshift(
-            formatDate('MM/dd', new Date(timestamp - i * oneday))
-          )
+          xAxis.data.unshift(formatDate('MM/dd', new Date(timestamp - i * oneday)))
         }
       },
       categoryErrorType(list) {
@@ -276,10 +242,7 @@
           legend.data.push(errorTypeEnum[key])
         }
         list.forEach((ele) => {
-          ele.fmt_time = formatDate(
-            'MM/dd',
-            new Date(Number(ele.exception_time))
-          )
+          ele.fmt_time = formatDate('MM/dd', new Date(Number(ele.exception_time)))
           if (category.hasOwnProperty(ele.error_type)) {
             category[ele.error_type].push(ele)
           }
@@ -356,5 +319,10 @@
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
+  }
+  .flex-box {
+    display: flex;
+    align-items: center;
+    line-height: 17px;
   }
 </style>

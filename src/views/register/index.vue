@@ -6,12 +6,7 @@
         <div style="color: transparent">占位符,不要删</div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
-        <el-form
-          ref="registerForm"
-          :model="form"
-          class="register-form"
-          :rules="registerRules"
-        >
+        <el-form ref="registerForm" :model="form" class="register-form" :rules="registerRules">
           <div class="title-tips">Welcome to {{ title }} ！</div>
           <el-form-item prop="username">
             <el-input
@@ -35,19 +30,11 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-button
-              class="register-btn"
-              type="primary"
-              @click.native.prevent="handleReister"
-            >
+            <el-button class="register-btn" type="primary" @click.native.prevent="handleReister">
               注册
             </el-button>
             <!-- <router-link to="/login"> -->
-            <div
-              class="router_link"
-              style="margin-top: 20px"
-              @click.stop="goto('/login')"
-            >
+            <div class="router_link" style="margin-top: 20px" @click.stop="goto('/login')">
               登录
             </div>
             <!-- </router-link> -->
@@ -71,8 +58,7 @@
     },
     beforeRouteLeave(to, from, next) {
       if (this.animation) {
-        let cancelAnimationFrame =
-          window.cancelAnimationFrame || window.mozCancelAnimationFrame
+        let cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
         cancelAnimationFrame(this.animation)
       }
       next()
@@ -205,13 +191,7 @@
             this.alpha += 0.05
           }
           ctx.globalAlpha = this.alpha
-          ctx.drawImage(
-            canvas2,
-            x - this.radius / 2,
-            y - this.radius / 2,
-            this.radius,
-            this.radius
-          )
+          ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius)
           this.timePassed += this.speed
         }
         for (let i = 0; i < maxStars; i++) {

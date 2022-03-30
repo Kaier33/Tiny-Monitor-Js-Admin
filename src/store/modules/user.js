@@ -4,11 +4,7 @@
 
 import Vue from 'vue'
 import { getUserInfo, login } from '@/api/user'
-import {
-  getAccessToken,
-  removeAccessToken,
-  setAccessToken,
-} from '@/utils/accessToken'
+import { getAccessToken, removeAccessToken, setAccessToken } from '@/utils/accessToken'
 import { resetRouter } from '@/router'
 import { title, tokenName } from '@/config'
 import defaultAvatar from '@/assets/avatar/default_avatar.jpeg'
@@ -66,10 +62,7 @@ const actions = {
           : '晚上好'
       Vue.prototype.$baseNotify(`欢迎登录${title}`, `${thisTime}！`)
     } else {
-      Vue.prototype.$baseMessage(
-        `登录接口异常，未正确返回${tokenName}...`,
-        'error'
-      )
+      Vue.prototype.$baseMessage(`登录接口异常，未正确返回${tokenName}...`, 'error')
     }
   },
   async getUserInfo({ commit }) {

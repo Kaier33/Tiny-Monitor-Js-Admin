@@ -52,9 +52,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     if (store.getters['user/accessToken']) {
-      config.headers[
-        'Authorization'
-      ] = `Bearer ${store.getters['user/accessToken']}`
+      config.headers['Authorization'] = `Bearer ${store.getters['user/accessToken']}`
     }
     //这里会过滤所有为空、0、false的key，如果不需要请自行注释
     // if (config.data)
@@ -64,8 +62,7 @@ instance.interceptors.request.use(
     //   )
     if (
       config.data &&
-      config.headers['Content-Type'] ===
-        'application/x-www-form-urlencoded;charset=UTF-8'
+      config.headers['Content-Type'] === 'application/x-www-form-urlencoded;charset=UTF-8'
     )
       config.data = qs.stringify(config.data)
     if (debounce.some((item) => config.url.includes(item)))
@@ -84,17 +81,14 @@ instance.interceptors.response.use(
     const { data, config } = response
     const { code, message } = data
     // 操作正常Code数组
-    const codeVerificationArray = isArray(successCode)
-      ? [...successCode]
-      : [...[successCode]]
+    const codeVerificationArray = isArray(successCode) ? [...successCode] : [...[successCode]]
     // 是否操作正常
     if (codeVerificationArray.includes(code)) {
       return data
     } else {
       handleCode(code, message)
       return Promise.reject(
-        '请求异常拦截:' + JSON.stringify({ url: config.url, code, message }) ||
-          'Error'
+        '请求异常拦截:' + JSON.stringify({ url: config.url, code, message }) || 'Error'
       )
     }
   },

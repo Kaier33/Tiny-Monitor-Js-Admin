@@ -16,9 +16,7 @@
       <el-col :xs="24" :sm="24" :md="16" :lg="20" :xl="20">
         <vab-query-form>
           <vab-query-form-top-panel :span="12">
-            <el-button icon="el-icon-plus" type="primary" @click="handleEdit">
-              添加
-            </el-button>
+            <el-button icon="el-icon-plus" type="primary" @click="handleEdit">添加</el-button>
           </vab-query-form-top-panel>
         </vab-query-form>
         <el-table
@@ -30,16 +28,8 @@
           default-expand-all
           :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
         >
-          <el-table-column
-            show-overflow-tooltip
-            prop="name"
-            label="name"
-          ></el-table-column>
-          <el-table-column
-            show-overflow-tooltip
-            prop="path"
-            label="路径"
-          ></el-table-column>
+          <el-table-column show-overflow-tooltip prop="name" label="name"></el-table-column>
+          <el-table-column show-overflow-tooltip prop="path" label="路径"></el-table-column>
           <el-table-column show-overflow-tooltip label="是否隐藏">
             <template #default="{ row }">
               <span>
@@ -59,23 +49,12 @@
             prop="component"
             label="vue文件路径"
           ></el-table-column>
-          <el-table-column
-            show-overflow-tooltip
-            prop="redirect"
-            label="重定向"
-          ></el-table-column>
-          <el-table-column
-            show-overflow-tooltip
-            prop="meta.title"
-            label="标题"
-          ></el-table-column>
+          <el-table-column show-overflow-tooltip prop="redirect" label="重定向"></el-table-column>
+          <el-table-column show-overflow-tooltip prop="meta.title" label="标题"></el-table-column>
           <el-table-column show-overflow-tooltip label="图标">
             <template #default="{ row }">
               <span v-if="row.meta">
-                <vab-icon
-                  v-if="row.meta.icon"
-                  :icon="['fas', row.meta.icon]"
-                ></vab-icon>
+                <vab-icon v-if="row.meta.icon" :icon="['fas', row.meta.icon]"></vab-icon>
               </span>
             </template>
           </el-table-column>

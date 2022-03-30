@@ -74,15 +74,7 @@ export function formatTime(time, option) {
     return parseTime(time, option)
   } else {
     return (
-      d.getMonth() +
-      1 +
-      '月' +
-      d.getDate() +
-      '日' +
-      d.getHours() +
-      '时' +
-      d.getMinutes() +
-      '分'
+      d.getMonth() + 1 + '月' + d.getDate() + '日' + d.getHours() + '时' + d.getMinutes() + '分'
     )
   }
 }
@@ -114,12 +106,8 @@ export function paramObj(url) {
  * @returns {*}
  */
 export function translateDataToTree(data) {
-  const parent = data.filter(
-    (value) => value.parentId === 'undefined' || value.parentId == null
-  )
-  const children = data.filter(
-    (value) => value.parentId !== 'undefined' && value.parentId != null
-  )
+  const parent = data.filter((value) => value.parentId === 'undefined' || value.parentId == null)
+  const children = data.filter((value) => value.parentId !== 'undefined' && value.parentId != null)
   const translator = (parent, children) => {
     parent.forEach((parent) => {
       children.forEach((current, index) => {

@@ -2,12 +2,7 @@
   <div class="index-container">
     <header>
       <p class="title">项目列表</p>
-      <el-button
-        size="medium"
-        icon="el-icon-plus"
-        type="primary"
-        @click.stop="showDialog = true"
-      >
+      <el-button size="medium" icon="el-icon-plus" type="primary" @click.stop="showDialog = true">
         创建项目
       </el-button>
     </header>
@@ -21,19 +16,13 @@
                 <span class="p_name">{{ item.p_name }}</span>
               </p>
               <div class="right-area">
-                <el-button
-                  type="primary"
-                  plain
-                  @click.stop="goto(`/issue/list?p_id=${item.p_id}`)"
-                >
+                <el-button type="primary" plain @click.stop="goto(`/issue/list?p_id=${item.p_id}`)">
                   查看详情
                 </el-button>
                 <el-dropdown trigger="click" @command="handleCommand">
                   <i class="more el-icon-more"></i>
                   <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item :command="item.p_id">
-                      删除项目
-                    </el-dropdown-item>
+                    <el-dropdown-item :command="item.p_id">删除项目</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
               </div>
@@ -47,11 +36,7 @@
     </main>
     <el-dialog title="新建项目" width="40%" :visible.sync="showDialog">
       <el-form ref="form" :model="form" :rules="rules">
-        <el-form-item
-          label="项目名称"
-          :label-width="formLabelWidth"
-          prop="p_name"
-        >
+        <el-form-item label="项目名称" :label-width="formLabelWidth" prop="p_name">
           <el-input
             v-model="form.p_name"
             maxlength="15"
@@ -59,11 +44,7 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="项目描述"
-          :label-width="formLabelWidth"
-          prop="p_desc"
-        >
+        <el-form-item label="项目描述" :label-width="formLabelWidth" prop="p_desc">
           <el-input
             v-model="form.p_desc"
             maxlength="50"
@@ -71,11 +52,7 @@
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="技术选型"
-          :label-width="formLabelWidth"
-          prop="p_tech"
-        >
+        <el-form-item label="技术选型" :label-width="formLabelWidth" prop="p_tech">
           <el-select v-model="form.p_tech" placeholder="请选择">
             <el-option
               v-for="(item, index) in techList"
@@ -88,9 +65,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="closeDialog">取 消</el-button>
-        <el-button type="primary" :loading="btnLoading" @click="confirm">
-          确 定
-        </el-button>
+        <el-button type="primary" :loading="btnLoading" @click="confirm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -155,8 +130,8 @@
             {
               barMinHeight: 1,
               data: [
-                120, 200, 150, 80, 70, 110, 0, 120, 200, 150, 80, 70, 110, 130,
-                120, 200, 150, 80, 70, 110, 0, 120, 70, 110,
+                120, 200, 150, 80, 70, 110, 0, 120, 200, 150, 80, 70, 110, 130, 120, 200, 150, 80,
+                70, 110, 0, 120, 70, 110,
               ],
               type: 'bar',
             },

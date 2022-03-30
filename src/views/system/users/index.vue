@@ -6,41 +6,16 @@
     </header>
     <main>
       <el-table :data="list" border stripe style="width: 100%">
-        <el-table-column
-          align="center"
-          type="index"
-          width="180"
-          label="序号"
-        ></el-table-column>
-        <el-table-column
-          align="center"
-          prop="username"
-          label="账号"
-        ></el-table-column>
-        <el-table-column
-          align="center"
-          prop="nickname"
-          label="昵称"
-        ></el-table-column>
-        <el-table-column
-          align="center"
-          prop="email"
-          label="邮箱"
-        ></el-table-column>
+        <el-table-column align="center" type="index" width="180" label="序号"></el-table-column>
+        <el-table-column align="center" prop="username" label="账号"></el-table-column>
+        <el-table-column align="center" prop="nickname" label="昵称"></el-table-column>
+        <el-table-column align="center" prop="email" label="邮箱"></el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <el-button
-              type="warning "
-              plain
-              disabled
-              size="small"
-              @click="handleClick(scope.row)"
-            >
+            <el-button type="warning " plain disabled size="small" @click="handleClick(scope.row)">
               冻结
             </el-button>
-            <el-button type="danger" plain disabled size="small">
-              删除
-            </el-button>
+            <el-button type="danger" plain disabled size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

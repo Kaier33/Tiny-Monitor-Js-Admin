@@ -2,26 +2,16 @@
   <div class="userManagement-container">
     <vab-query-form>
       <vab-query-form-left-panel :span="12">
-        <el-button icon="el-icon-plus" type="primary" @click="handleEdit">
-          添加
-        </el-button>
-        <el-button icon="el-icon-delete" type="danger" @click="handleDelete">
-          批量删除
-        </el-button>
+        <el-button icon="el-icon-plus" type="primary" @click="handleEdit">添加</el-button>
+        <el-button icon="el-icon-delete" type="danger" @click="handleDelete">批量删除</el-button>
       </vab-query-form-left-panel>
       <vab-query-form-right-panel :span="12">
         <el-form :inline="true" :model="queryForm" @submit.native.prevent>
           <el-form-item>
-            <el-input
-              v-model.trim="queryForm.username"
-              placeholder="请输入用户名"
-              clearable
-            />
+            <el-input v-model.trim="queryForm.username" placeholder="请输入用户名" clearable />
           </el-form-item>
           <el-form-item>
-            <el-button icon="el-icon-search" type="primary" @click="queryData">
-              查询
-            </el-button>
+            <el-button icon="el-icon-search" type="primary" @click="queryData">查询</el-button>
           </el-form-item>
         </el-form>
       </vab-query-form-right-panel>
@@ -34,21 +24,9 @@
       @selection-change="setSelectRows"
     >
       <el-table-column show-overflow-tooltip type="selection"></el-table-column>
-      <el-table-column
-        show-overflow-tooltip
-        prop="id"
-        label="id"
-      ></el-table-column>
-      <el-table-column
-        show-overflow-tooltip
-        prop="username"
-        label="用户名"
-      ></el-table-column>
-      <el-table-column
-        show-overflow-tooltip
-        prop="email"
-        label="邮箱"
-      ></el-table-column>
+      <el-table-column show-overflow-tooltip prop="id" label="id"></el-table-column>
+      <el-table-column show-overflow-tooltip prop="username" label="用户名"></el-table-column>
+      <el-table-column show-overflow-tooltip prop="email" label="邮箱"></el-table-column>
 
       <el-table-column show-overflow-tooltip label="权限">
         <template #default="{ row }">
@@ -58,11 +36,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column
-        show-overflow-tooltip
-        prop="datatime"
-        label="修改时间"
-      ></el-table-column>
+      <el-table-column show-overflow-tooltip prop="datatime" label="修改时间"></el-table-column>
       <el-table-column show-overflow-tooltip label="操作" width="200">
         <template #default="{ row }">
           <el-button type="text" @click="handleEdit(row)">编辑</el-button>

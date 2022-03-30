@@ -6,13 +6,7 @@
         <div style="color: transparent">占位符,不要删</div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
-        <el-form
-          ref="form"
-          :model="form"
-          :rules="rules"
-          class="login-form"
-          label-position="left"
-        >
+        <el-form ref="form" :model="form" :rules="rules" class="login-form" label-position="left">
           <!-- <div class="title">(ﾉ>ω&lt;)ﾉ</div> -->
           <div class="title-tips">Welcome to {{ title }} ！</div>
           <el-form-item style="margin-top: 40px" prop="username">
@@ -39,31 +33,18 @@
               placeholder="请输入密码"
               @keyup.enter.native="handleLogin"
             />
-            <span
-              v-if="passwordType === 'password'"
-              class="show-password"
-              @click="handlePassword"
-            >
+            <span v-if="passwordType === 'password'" class="show-password" @click="handlePassword">
               <vab-icon :icon="['fas', 'eye-slash']"></vab-icon>
             </span>
             <span v-else class="show-password" @click="handlePassword">
               <vab-icon :icon="['fas', 'eye']"></vab-icon>
             </span>
           </el-form-item>
-          <el-button
-            :loading="loading"
-            class="login-btn"
-            type="primary"
-            @click="handleLogin"
-          >
+          <el-button :loading="loading" class="login-btn" type="primary" @click="handleLogin">
             登录
           </el-button>
           <!-- <router-link to="/register"> -->
-          <div
-            class="router_link"
-            style="margin-top: 20px"
-            @click.stop="goto('/register')"
-          >
+          <div class="router_link" style="margin-top: 20px" @click.stop="goto('/register')">
             注册
           </div>
           <!-- </router-link> -->
@@ -87,8 +68,7 @@
     },
     beforeRouteLeave(to, from, next) {
       if (this.animation) {
-        let cancelAnimationFrame =
-          window.cancelAnimationFrame || window.mozCancelAnimationFrame
+        let cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame
         cancelAnimationFrame(this.animation)
       }
       next()
@@ -171,9 +151,7 @@
               .dispatch('user/login', this.form)
               .then(() => {
                 const routerPath =
-                  this.redirect === '/404' || this.redirect === '/401'
-                    ? '/'
-                    : this.redirect
+                  this.redirect === '/404' || this.redirect === '/401' ? '/' : this.redirect
                 this.$router.push(routerPath).catch(() => {})
                 this.loading = false
               })
@@ -242,10 +220,8 @@
           stars[count] = this
         }
         Star.prototype.draw = function () {
-          let x =
-              Math.sin(this.timePassed + 1) * this.orbitRadius + this.orbitX,
-            y =
-              (Math.cos(this.timePassed) * this.orbitRadius) / 2 + this.orbitY,
+          let x = Math.sin(this.timePassed + 1) * this.orbitRadius + this.orbitX,
+            y = (Math.cos(this.timePassed) * this.orbitRadius) / 2 + this.orbitY,
             twinkle = self.random(10)
           if (twinkle === 1 && this.alpha > 0) {
             this.alpha -= 0.05
@@ -253,13 +229,7 @@
             this.alpha += 0.05
           }
           ctx.globalAlpha = this.alpha
-          ctx.drawImage(
-            canvas2,
-            x - this.radius / 2,
-            y - this.radius / 2,
-            this.radius,
-            this.radius
-          )
+          ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius)
           this.timePassed += this.speed
         }
         for (var i = 0; i < maxStars; i++) {
