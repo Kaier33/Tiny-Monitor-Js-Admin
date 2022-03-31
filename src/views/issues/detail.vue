@@ -356,6 +356,7 @@
       line-height: 30px;
       font-weight: 600;
       font-size: 26px;
+      word-break: break-all;
     }
     .tags {
       margin-top: 10px;

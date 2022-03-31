@@ -7,7 +7,7 @@
       </el-button>
     </header>
     <main>
-      <div class="project-list">
+      <div v-if="list.length" class="project-list">
         <div v-for="(item, index) in list" :key="index" class="project-box">
           <section class="header">
             <div class="clickable">
@@ -33,6 +33,7 @@
           <p class="tips">*最近24小时的数据</p>
         </div>
       </div>
+      <el-empty v-else description="暂无项目"></el-empty>
     </main>
     <el-dialog title="新建项目" width="40%" :visible.sync="showDialog">
       <el-form ref="form" :model="form" :rules="rules">
