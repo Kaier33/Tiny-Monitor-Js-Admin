@@ -40,7 +40,6 @@ const handleCode = (code, message) => {
       break
   }
 }
-
 const instance = axios.create({
   baseURL,
   timeout: requestTimeout,

@@ -135,7 +135,7 @@
         <div class="header-info">
           <div class="header-icon icon"></div>
           <div class="flex-info">
-            <p class="flex-box">
+            <p>
               <span style="flex-shrink: 0">Header :</span>
               <span>{{ getHeader() }}</span>
             </p>
@@ -181,7 +181,6 @@
               parser.setUA(this.resData.error_info.deviceInfo.userAgent)
               this.UA_Info = parser.getResult()
             }
-            console.log('resData::', this.resData)
             // console.log('this.UA_Info::', this.UA_Info)
           } else {
             this.$baseMessage(res.message, 'error')
@@ -208,6 +207,8 @@
               return 'firefox'
             case /ie/.test(name):
               return 'ie'
+            case /wechat/.test(name):
+              return 'wechat'
           }
         }
         return icon
@@ -289,6 +290,7 @@
     align-items: center;
   }
   .flex-info {
+    word-break: break-all;
     display: flex;
     align-items: center;
     & > p {
@@ -304,8 +306,9 @@
   }
   .tag {
     overflow: hidden;
-    height: 24px;
+    min-height: 24px;
     margin: 4px 6px;
+    word-break: break-all;
     line-height: 22px;
     background-color: #eef1f9;
     border: 1px solid #dde2f4;
@@ -314,10 +317,10 @@
     color: #5470c6;
     border-radius: 4px;
     box-sizing: border-box;
-    white-space: nowrap;
     display: inline-flex;
     align-content: center;
     & > span:first-child {
+      flex-shrink: 0;
       background-color: #fff;
       color: #2f2936;
       padding: 0 8px;
@@ -332,7 +335,7 @@
     height: 36px;
   }
   .issue-detail-container {
-    padding: 20px 10px 20px 10px !important;
+    padding: 20px 10px 50px 10px !important;
     margin: 0 !important;
     background: #f5f7f8 !important;
   }
@@ -450,8 +453,9 @@
   .ie {
     background: url('../../assets/icons/ie.png');
   }
-  // .MicroMessenger {}
-  // .qqbrowser{}
+  .wechat {
+    background: url('../../assets/icons/wechat.png');
+  }
 
   .default_system {
     background: url('../../assets/icons/default_system.png');

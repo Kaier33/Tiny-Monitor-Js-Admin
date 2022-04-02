@@ -2,7 +2,8 @@
  * @description 导出默认网路配置
  **/
 const network = {
-  baseURL: process.env.NODE_ENV === 'development' ? '/proxy_api/' : '/monit/api',
+  // 生成环境. 可以通过Nginx /Apache等去 转地址.
+  baseURL: process.env.NODE_ENV === 'development' ? '/proxy_api/' : '/monit/api/',
   //配后端数据的接收方式application/json;charset=UTF-8或者application/x-www-form-urlencoded;charset=UTF-8
   contentType: 'application/json;charset=UTF-8',
   //消息框消失时间
