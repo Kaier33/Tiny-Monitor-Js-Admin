@@ -36,3 +36,15 @@ export function getUserList() {
     url: '/users',
   })
 }
+
+export function changePassword(data) {
+  const { oldpass, password } = data
+  return request({
+    url: '/user/change-password',
+    method: 'post',
+    data: {
+      oldpass,
+      password,
+    },
+  })
+}

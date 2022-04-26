@@ -11,7 +11,7 @@ const network = {
   //最长请求时间
   requestTimeout: 10000,
   //操作正常code，支持String、Array、int多种类型
-  successCode: [200, 0],
+  successCode: [200, 0, 200403],
   //登录失效code
   invalidCode: 402,
   //无权限code
