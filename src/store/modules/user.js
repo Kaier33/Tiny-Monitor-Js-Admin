@@ -18,8 +18,10 @@ const state = () => ({
 const getters = {
   accessToken: (state) => state.accessToken,
   username: (state) => state.username,
+  nickname: (state) => state.nickname,
   avatar: (state) => state.avatar,
   permissions: (state) => state.permissions,
+  getUserInfo: (state) => state,
 }
 const mutations = {
   setAccessToken(state, accessToken) {
@@ -34,6 +36,15 @@ const mutations = {
   },
   setPermissions(state, permissions) {
     state.permissions = permissions
+  },
+  setEmail(state, email) {
+    state.email = email
+  },
+  setNickname(state, nickname) {
+    state.nickname = nickname
+  },
+  setUserInfo(state, payload) {
+    state = Object.assign(state, ...payload)
   },
 }
 const actions = {
@@ -71,11 +82,13 @@ const actions = {
       Vue.prototype.$baseMessage('验证失败，请重新登录...', 'error')
       return false
     }
-    let { permissions = ['admin'], username, avatar } = data
+    let { permissions = ['admin'], username, avatar, nickname, email } = data
     if (permissions && username && Array.isArray(permissions)) {
       commit('setPermissions', permissions)
       commit('setUsername', username)
       commit('setAvatar', avatar)
+      commit('setEmail', email)
+      commit('setNickname', nickname)
       return permissions
     } else {
       Vue.prototype.$baseMessage('用户信息接口异常', 'error')

@@ -24,6 +24,14 @@ export function getUserInfo() {
   })
 }
 
+export function updateUserInfo(data) {
+  return request({
+    url: '/user',
+    method: 'put',
+    data,
+  })
+}
+
 export function getUserDetail(id) {
   return request({
     url: `/user/${id}`,

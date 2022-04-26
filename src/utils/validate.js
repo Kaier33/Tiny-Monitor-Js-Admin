@@ -42,3 +42,13 @@ export function isPhone(str) {
   const reg = /^1\d{10}$/
   return reg.test(str)
 }
+
+/**
+ * @description 判断是否是邮箱
+ * @param str
+ * @returns {boolean}
+ */
+export function isEmail(str) {
+  const reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+  return reg.test(str)
+}

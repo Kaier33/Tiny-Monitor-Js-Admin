@@ -3,7 +3,7 @@
     <span class="avatar-dropdown">
       <img class="user-avatar" :src="avatar" alt="" />
       <div class="user-name">
-        {{ username }}
+        {{ nickname || username }}
         <i class="el-icon-arrow-down el-icon--right"></i>
       </div>
     </span>
@@ -25,6 +25,7 @@
       ...mapGetters({
         avatar: 'user/avatar',
         username: 'user/username',
+        nickname: 'user/nickname',
       }),
     },
     methods: {
