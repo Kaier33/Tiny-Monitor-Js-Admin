@@ -8,7 +8,7 @@
         <el-input v-model="ruleForm.nickname" maxlength="20" placeholder="可填写昵称"></el-input>
       </el-form-item>
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="ruleForm.email" maxlength="20" placeholder="可填写邮箱地址"></el-input>
+        <el-input v-model="ruleForm.email" maxlength="30" placeholder="可填写邮箱地址"></el-input>
       </el-form-item>
       <el-form-item label="头像" prop="avatar">
         <el-input v-model="ruleForm.avatar" maxlength="100" placeholder="头像的网络地址"></el-input>

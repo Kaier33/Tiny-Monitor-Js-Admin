@@ -131,7 +131,7 @@
           </div>
         </div>
       </div>
-      <div class="flex-box">
+      <!-- <div class="flex-box">
         <div class="header-info">
           <div class="header-icon icon"></div>
           <div class="flex-info">
@@ -141,11 +141,38 @@
             </p>
           </div>
         </div>
+      </div> -->
+    </section>
+    <section v-if="Array.isArray(resData.breadcrumb_trail)" class="breadcrumbs-info">
+      <div class="flex-box">
+        <p class="trace-icon icon"></p>
+        <p class="title">Breadcrumbs</p>
+      </div>
+      <div class="list">
+        <div v-for="(item, index) in resData.breadcrumb_trail" :key="index" class="item">
+          <p>
+            <span>target:&nbsp;</span>
+            <span>{{ item.target }}</span>
+          </p>
+          <p>
+            <span>action:&nbsp;</span>
+            <span>{{ item.subType }}</span>
+          </p>
+          <p>
+            <span>inner:&nbsp;</span>
+            <span>{{ item.innerHTML }}</span>
+          </p>
+          <p>
+            <span>outer:&nbsp;</span>
+            <span>{{ item.outerHTML }}</span>
+          </p>
+          <p>
+            <span>pageURL:&nbsp;</span>
+            <span>{{ item.pageURL }}</span>
+          </p>
+        </div>
       </div>
     </section>
-    <!-- <br />
-    <br />
-    {{ logs() }} -->
   </div>
 </template>
 <script>
@@ -172,7 +199,8 @@
       getErrorDetail(id)
         .then((res) => {
           if (res.code === 200) {
-            const { error_info, header } = res.data
+            const { error_info, header, breadcrumb_trail } = res.data
+            breadcrumb_trail && (res.data.breadcrumb_trail = JSON.parse(breadcrumb_trail))
             error_info && (res.data.error_info = JSON.parse(error_info))
             header && (res.data.header = JSON.parse(header))
             this.resData = res.data
@@ -340,7 +368,7 @@
     background: #f5f7f8 !important;
   }
   .error-info {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     padding: 20px 10px;
     .error-icon {
       background: url('../../assets/icons/error.png') no-repeat;
@@ -368,7 +396,7 @@
   }
   .device-info {
     padding: 20px 10px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     .browser-info,
     .system-info {
       display: flex;
@@ -397,6 +425,7 @@
     }
   }
   .other-info {
+    margin-bottom: 20px;
     padding: 20px 10px;
     .screen-info {
       display: flex;
@@ -431,6 +460,47 @@
       .header-icon {
         margin-right: 15px;
         background: url('../../assets/icons/header.png') no-repeat center / 100% 100%;
+      }
+    }
+  }
+  .breadcrumbs-info {
+    padding: 20px 10px;
+    .trace-icon {
+      background: url('../../assets/icons/trace.png') no-repeat;
+      background-position: center;
+      background-size: 100% 100%;
+      margin-right: 15px;
+    }
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .list {
+      position: relative;
+      top: 0;
+      margin-top: 10px;
+      word-break: break-all;
+      max-height: 400px;
+      overflow-y: auto;
+      font-size: 12px;
+      & > .item {
+        padding: 5px 10px;
+        background: rgba(250, 249, 251, 0.5);
+        border-radius: 10px;
+        margin-bottom: 8px;
+        & > p {
+          display: flex;
+          line-height: 20px;
+          & > span:first-child {
+            text-align: right;
+            min-width: 65px;
+            flex-shrink: 0;
+            font-weight: 600;
+          }
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
   }
