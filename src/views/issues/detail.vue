@@ -143,13 +143,20 @@
         </div>
       </div> -->
     </section>
-    <section v-if="Array.isArray(resData.breadcrumb_trail)" class="breadcrumbs-info">
+    <section
+      v-if="Array.isArray(resData.breadcrumb_trail) && resData.breadcrumb_trail.length"
+      class="breadcrumbs-info"
+    >
       <div class="flex-box">
         <p class="trace-icon icon"></p>
         <p class="title">Breadcrumbs</p>
       </div>
       <div class="list">
-        <div v-for="(item, index) in resData.breadcrumb_trail" :key="index" class="item">
+        <div
+          v-for="(item, index) in resData.breadcrumb_trail.slice().reverse()"
+          :key="index"
+          class="item"
+        >
           <p>
             <span>target:&nbsp;</span>
             <span>{{ item.target }}</span>
